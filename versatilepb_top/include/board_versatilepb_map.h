@@ -1,0 +1,33 @@
+#ifndef _BOARD_VERSATILEPB_MAP_H_
+#define _BOARD_VERSATILEPB_MAP_H_
+#define BASE_RAM        0x00000000
+#define BASE_SYS_CTRL_0 0x10000000
+#define BASE_VIC_1      0x10003000
+#define BASE_AACI       0x10004000
+#define BASE_MCI        0x10005000
+#define BASE_KEYBOARD   0x10006000
+#define BASE_MOUSE      0x10007000
+#define BASE_CHLCD      0x10008000
+#define BASE_UART_3     0x10009000
+#define BASE_SSMC       0x10100000
+#define BASE_MPMC       0x10110000
+#define BASE_CLCD       0x10120000
+#define BASE_DMA        0x10130000
+#define BASE_VIC_0      0x10140000
+#define BASE_SYS_CTRL_1 0x101e0000
+#define BASE_WATCHDOG   0x101e1000
+#define BASE_TIMER_0    0x101e2000
+#define BASE_TIMER_1    0x101e3000
+#define BASE_GPIO_0     0x101e4000
+#define BASE_GPIO_1     0x101e5000
+#define BASE_GPIO_2     0x101e6000
+#define BASE_GPIO_3     0x101e7000
+#define BASE_RTC        0x101e8000
+#define BASE_SCI        0x101f0000
+#define BASE_UART_0     0x101f1000
+#define BASE_UART_1     0x101f2000
+#define BASE_UART_2     0x101f3000
+#define BASE_SSP        0x101f4000
+#define BASE_CALCULATOR 0x14000000
+#define BASE_FTP        0x14001000
+#endif
