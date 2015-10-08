@@ -7,7 +7,7 @@ MVP is a multi-core whole system simulation virtual platform based on SystemC. I
 * ISS (instruction set simulator) supports ARMv5/v6/v6K/v7-A instruction set
 * Essential peripheral modules for Linux booting: interrupt controller, system controller, timer, uart 
 
-It is also the base platform for the [CASL Hypervisor](https://github.com/ufoderek/meteor).
+It is also the base platform for the [CASL Hypervisor](https://github.com/ufoderek/casl_hypervisor).
 
 ## System Requirement
 
