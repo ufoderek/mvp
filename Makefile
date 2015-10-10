@@ -5,7 +5,9 @@ bin_dir             :=  bin
 target_bin          :=  $(bin_dir)/$(target)
 build_dir           :=  builds/$(target)/
 
+ifneq "$(MAKECMDGOALS)" "clean"
 src_files           :=  $(shell find $(sub_dirs) -name '*.cpp')
+endif
 
 obj_files           :=  $(notdir $(src_files:%.cpp=%.o))
 full_obj_files      :=  $(addprefix $(build_dir), $(obj_files))
