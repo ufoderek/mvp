@@ -275,7 +275,7 @@ board_realviewpb::board_realviewpb(sc_module_name name, bool using_gdb, unsigned
     printm(d_realviewpb, "ARMv7-A");
     arm.reset(new armv7a("armv7a", start_addr, 0, using_gdb, gdb_port));
     //arm.reset(new armv7a_tlb("armv7a", start_addr, 0, using_gdb, gdb_port));
-    arm->clk(clk_fast->signal());
+    arm->clk(*clk_fast);
     arm->irq_n(irq_n);
     arm->virq_n(virq_n);
     arm->ahb_master_socket.bind(my_bus->ahb_from_master_socket);
@@ -287,7 +287,7 @@ board_realviewpb::board_realviewpb(sc_module_name name, bool using_gdb, unsigned
     //pbx = 0x01820500
     //vexpress = 0x01900500
     status_0.reset(new SYSCTRL_0("sys_reg", 4096, 0x01780500, 0x0e000000));
-    status_0->clk(clk_slow->signal());
+    status_0->clk(*clk_slow);
     status_0->rst_n(rst_n);
     my_bus->ahb_to_slave_socket.bind(status_0->ahb_slave_socket);
     my_bus->add_mapping(slave_id++, 0x10000000, 4096);
@@ -295,7 +295,7 @@ board_realviewpb::board_realviewpb(sc_module_name name, bool using_gdb, unsigned
     print_line();
     printm(d_realviewpb, "System controller 0");
     status_1.reset(new SYSCTRL_1("sys_ctrl_0", 4096));
-    status_1->clk(clk_slow->signal());
+    status_1->clk(*clk_slow);
     status_1->rst_n(rst_n);
     my_bus->ahb_to_slave_socket.bind(status_1->ahb_slave_socket);
     my_bus->add_mapping(slave_id++, 0x10001000, 4096);
@@ -303,7 +303,7 @@ board_realviewpb::board_realviewpb(sc_module_name name, bool using_gdb, unsigned
     print_line();
     printm(d_realviewpb, "UART 0");
     uart_0.reset(new UART("uart_0", 4096, true)); //set stdin to be non-blocking
-    uart_0->clk(clk_slow->signal());
+    uart_0->clk(*clk_slow);
     uart_0->rst_n(rst_n);
     uart_0->irq_n(channel[44]);
     my_bus->ahb_to_slave_socket.bind(uart_0->ahb_slave_socket);
@@ -312,7 +312,7 @@ board_realviewpb::board_realviewpb(sc_module_name name, bool using_gdb, unsigned
     print_line();
     printm(d_realviewpb, "Timer 0");
     timer_0.reset(new TIMER("timer_0", 4096));
-    timer_0->clk(clk_timer->signal());
+    timer_0->clk(*clk_timer);
     timer_0->rst_n(rst_n);
     timer_0->irq_n(channel[36]);
     my_bus->ahb_to_slave_socket.bind(timer_0->ahb_slave_socket);
@@ -321,7 +321,7 @@ board_realviewpb::board_realviewpb(sc_module_name name, bool using_gdb, unsigned
     print_line();
     printm(d_realviewpb, "Timer 2");
     timer_2.reset(new TIMER("timer_2", 4096));
-    timer_2->clk(clk_timer->signal());
+    timer_2->clk(*clk_timer);
     timer_2->rst_n(rst_n);
     timer_2->irq_n(channel[37]);
     my_bus->ahb_to_slave_socket.bind(timer_2->ahb_slave_socket);
@@ -336,7 +336,7 @@ board_realviewpb::board_realviewpb(sc_module_name name, bool using_gdb, unsigned
     print_line();
     printm(d_realviewpb, "Generic Interrupt Controller CPU interface (on board)");
     gic_cpu_if.reset(new gic2_cpu_if("gic_cpu_if", 4096, gic_dist, 1, 64));
-    gic_cpu_if->clk(clk_slow->signal());
+    gic_cpu_if->clk(*clk_slow);
     gic_cpu_if->irq_n[0](irq_n);
     my_bus->ahb_to_slave_socket.bind(gic_cpu_if->ahb_slave_socket);
     my_bus->add_mapping(slave_id++, 0x1E000000, 4096);

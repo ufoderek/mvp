@@ -11,14 +11,15 @@ It is also the base platform for the [CASL Hypervisor](https://github.com/ufoder
 
 ## System Requirement
 
-1. Kubuntu 12.04 64-bit
-2. SystemC 2.2
-3. TLM 2.0.1
-4. Boost 1.48
+1. Modern Mac OS X or Linux distributions (tested on OS X El Capitan)
+2. SystemC 2.3.1 (with TLM)
+3. Boost 1.58
 
 ## Build
 
-Edit Defs.mk to include proper pathes for SystemC, TLM and Boost library before compiling:
+1. Download and build SystemC from http://accellera.org.
+2. Download and install the Boost Library or get it via Homebrew.
+3. Edit Defs.mk to include proper pathes for SystemC before compiling.
 
 ```
     $ make pb -j4    # build for Realview Platform Baseboard with ARMv7-A ISS

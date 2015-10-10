@@ -58,7 +58,7 @@ bool semihost::write(uint32_t data, uint32_t addr, int size)
     {
         case OFFSET_TYPE:
             printd(d_semihost, "write type=%d", data);
-            type = data;
+            type = (semihost_type)data;
             break;
         case OFFSET_FD:
             printd(d_semihost, "write fd=%d", data);
@@ -174,7 +174,7 @@ void semihost::do_semihost()
     {
         case TYPE_OPEN:
             printd(d_semihost, "do_semihost open, path=%s, flags=%d, mode=%d", path, flags, mode);
-            return_val = open(path, convert_flags(flags), mode);
+            return_val = open((const char*)path, convert_flags(flags), mode);
             if(return_val == -1)
             {
                 printb(d_semihost, "do_semihost open error (%s)", path);

@@ -31,8 +31,8 @@ auto_ptr<signal_redirector> sig_redirector;
 
 int sc_main(int argc, char* argv[])
 {
-    printm(d_main, "disable SystemC's warning messages of duplicated object names");
-    sc_report_handler::set_actions(SC_ID_OBJECT_EXISTS_, SC_DO_NOTHING);
+    //printm(d_main, "disable SystemC's warning messages of duplicated object names");
+    //sc_report_handler::set_actions(SC_ID_OBJECT_EXISTS_, SC_DO_NOTHING);
 
     int i = 1;
     bool using_vmm = false; //the vmm

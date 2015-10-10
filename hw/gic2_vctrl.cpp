@@ -75,7 +75,7 @@ bool gic2_vctrl::write(uint32_t data, uint32_t offset)
 
         list[n].hw = get_bit(data, 31);
         list[n].group1 = get_bit(data, 30);
-        list[n].state = get_field(data, 29, 28);
+        list[n].state = (list_reg_state)get_field(data, 29, 28);
         list[n].priority = get_field(data, 27, 23);
         list[n].pid = get_field(data, 19, 10);
         list[n].vid = get_field(data, 9, 0);

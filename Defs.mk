@@ -1,4 +1,5 @@
 CPP				:=	g++
+OS              :=  $(shell uname -s)
 
 OPT_FLAG		:=	-O2 -march=native -fomit-frame-pointer -fvisibility-inlines-hidden -pipe
 MVP_FLAG		:=	-DSC_INCLUDE_DYNAMIC_PROCESSES
@@ -7,13 +8,18 @@ RELEASE_FLAG	:=	$(OPT_FLAG) $(MVP_FLAG) $(FUCKGCC_FLAG) $(COMMON_FLAG) -DRELEASE
 DEBUG_FLAG		:=	$(OPT_FLAG) $(MVP_FLAG) $(FUCKGCC_FLAG) $(COMMON_FLAG) -DINST_ASSERT -DCPU_ASSERT
 
 STRIP			:=	strip
+ifeq ($(OS),Darwin)
+STRIP_FLAG		:=	-S
+endif
+ifeq ($(OS),Linux)
 STRIP_FLAG		:=	-s
+endif
 
-TOOLCHAIN_BASE  :=  /home/user/toolchain
-SC_INC			:=	-I$(TOOLCHAIN_BASE)/systemc-2.2.0/include -I$(TOOLCHAIN_BASE)/tlm-2.0.1/include/tlm
-SC_LIB			:=	-L$(TOOLCHAIN_BASE)/systemc-2.2.0/lib-linux64
-BOOST_INC       :=  -I$(TOOLCHAIN_BASE)/boost-1.48.0/include
-BOOST_LIB       :=  -L$(TOOLCHAIN_BASE)/boost-1.48.0/lib
+TOOLCHAIN_BASE  :=  /Volumes/work/wk/toolchain
+SC_INC			:=	-I$(TOOLCHAIN_BASE)/systemc-2.3.1/include
+SC_LIB			:=	-L$(TOOLCHAIN_BASE)/systemc-2.3.1/lib-macosx64
+BOOST_INC       :=  -I/usr/local/Cellar/boost/1.58.0/include
+BOOST_LIB       :=  -I/usr/local/Cellar/boost/1.58.0/lib
 INC				:=	$(SC_INC) $(BOOST_INC)
 LIB				:=	$(SC_LIB) $(BOOST_LIB) -lsystemc
 

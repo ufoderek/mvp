@@ -95,7 +95,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "ARMv7-A");
     arm.reset(new armv7a("armv7a", start_addr, 0, using_gdb, gdb_port));
-    arm->clk(clk_fast->signal());
+    arm->clk(*clk_fast);
     arm->irq_n(irq_n);
     arm->virq_n(virq_n);
     arm->ahb_master_socket.bind(my_bus->ahb_from_master_socket);
@@ -111,7 +111,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "Generic Interrupt Controller CPU interface (on board)");
     gic_cpu_if.reset(new gic2_cpu_if("gic_cpu_if", 4096, gic_dist, 1, 64));
-    gic_cpu_if->clk(clk_slow->signal());
+    gic_cpu_if->clk(*clk_slow);
     gic_cpu_if->irq_n[0](irq_n);
     my_bus->ahb_to_slave_socket.bind(gic_cpu_if->ahb_slave_socket);
     my_bus->add_mapping(slave_id++, 0x50001000, 4096);
@@ -125,7 +125,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "Generic Interrupt Virtual CPU Interface");
     gic_vcpu_if.reset(new gic2_vcpu_if("gic_vcpu_if", 4096, gic_vctrl, gic_cpu_if));
-    gic_vcpu_if->clk(clk_slow->signal());
+    gic_vcpu_if->clk(*clk_slow);
     gic_vcpu_if->virq_n(virq_n);
     my_bus->ahb_to_slave_socket.bind(gic_vcpu_if->ahb_slave_socket);
     my_bus->add_mapping(slave_id++, 0x50003000, 4096);
@@ -145,7 +145,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "UART 0");
     uart_0.reset(new UART("uart_0", 4096, true)); //set stdin to be non-blocking
-    uart_0->clk(clk_slow->signal());
+    uart_0->clk(*clk_slow);
     uart_0->rst_n(rst_n);
     uart_0->irq_n(channel[33]);
     my_bus->ahb_to_slave_socket.bind(uart_0->ahb_slave_socket);
@@ -154,7 +154,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 0");
     timer_0.reset(new TIMER("timer_0", 4096));
-    timer_0->clk(clk_timer->signal());
+    timer_0->clk(*clk_timer);
     timer_0->rst_n(rst_n);
     timer_0->irq_n(channel[34]);
     my_bus->ahb_to_slave_socket.bind(timer_0->ahb_slave_socket);
@@ -163,7 +163,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "System registers");
     sys_reg.reset(new SYSCTRL_0("sys_reg", 4096, 0x01780500, 0x0e000000));
-    sys_reg->clk(clk_slow->signal());
+    sys_reg->clk(*clk_slow);
     sys_reg->rst_n(rst_n);
     my_bus->ahb_to_slave_socket.bind(sys_reg->ahb_slave_socket);
     my_bus->add_mapping(slave_id++, 0x50007000, 4096);
@@ -171,7 +171,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "System controller");
     sys_ctrl.reset(new SYSCTRL_1("sys_ctrl", 4096));
-    sys_ctrl->clk(clk_slow->signal());
+    sys_ctrl->clk(*clk_slow);
     sys_ctrl->rst_n(rst_n);
     my_bus->ahb_to_slave_socket.bind(sys_ctrl->ahb_slave_socket);
     my_bus->add_mapping(slave_id++, 0x50008000, 4096);
@@ -181,7 +181,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "UART 4");
     uart_4.reset(new UART("uart_4", 4096, true, "uart_4"));
-    uart_4->clk(clk_slow->signal());
+    uart_4->clk(*clk_slow);
     uart_4->rst_n(rst_n);
     uart_4->irq_n(channel[40]);
     my_bus->ahb_to_slave_socket.bind(uart_4->ahb_slave_socket);
@@ -190,7 +190,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "UART 5");
     uart_5.reset(new UART("uart_5", 4096, true, "uart_5"));
-    uart_5->clk(clk_slow->signal());
+    uart_5->clk(*clk_slow);
     uart_5->rst_n(rst_n);
     uart_5->irq_n(channel[41]);
     my_bus->ahb_to_slave_socket.bind(uart_5->ahb_slave_socket);
@@ -199,7 +199,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "UART 6");
     uart_6.reset(new UART("uart_6", 4096, true, "uart_6"));
-    uart_6->clk(clk_slow->signal());
+    uart_6->clk(*clk_slow);
     uart_6->rst_n(rst_n);
     uart_6->irq_n(channel[42]);
     my_bus->ahb_to_slave_socket.bind(uart_6->ahb_slave_socket);
@@ -208,7 +208,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_meteorvb, "UART 7");
     uart_7.reset(new UART("uart_7", 4096, true, "uart_7"));
-    uart_7->clk(clk_slow->signal());
+    uart_7->clk(*clk_slow);
     uart_7->rst_n(rst_n);
     uart_7->irq_n(channel[43]);
     my_bus->ahb_to_slave_socket.bind(uart_7->ahb_slave_socket);
@@ -217,7 +217,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 4");
     timer_4.reset(new TIMER("timer_4", 4096));
-    timer_4->clk(clk_timer->signal());
+    timer_4->clk(*clk_timer);
     timer_4->rst_n(rst_n);
     timer_4->irq_n(channel[44]);
     my_bus->ahb_to_slave_socket.bind(timer_4->ahb_slave_socket);
@@ -226,7 +226,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 5");
     timer_5.reset(new TIMER("timer_5", 4096));
-    timer_5->clk(clk_timer->signal());
+    timer_5->clk(*clk_timer);
     timer_5->rst_n(rst_n);
     timer_5->irq_n(channel[45]);
     my_bus->ahb_to_slave_socket.bind(timer_5->ahb_slave_socket);
@@ -235,7 +235,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 6");
     timer_6.reset(new TIMER("timer_6", 4096));
-    timer_6->clk(clk_timer->signal());
+    timer_6->clk(*clk_timer);
     timer_6->rst_n(rst_n);
     timer_6->irq_n(channel[46]);
     my_bus->ahb_to_slave_socket.bind(timer_6->ahb_slave_socket);
@@ -244,7 +244,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 7");
     timer_7.reset(new TIMER("timer_7", 4096));
-    timer_7->clk(clk_timer->signal());
+    timer_7->clk(*clk_timer);
     timer_7->rst_n(rst_n);
     timer_7->irq_n(channel[47]);
     my_bus->ahb_to_slave_socket.bind(timer_7->ahb_slave_socket);
@@ -253,7 +253,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 8");
     timer_8.reset(new TIMER("timer_8", 4096));
-    timer_8->clk(clk_timer->signal());
+    timer_8->clk(*clk_timer);
     timer_8->rst_n(rst_n);
     timer_8->irq_n(channel[48]);
     my_bus->ahb_to_slave_socket.bind(timer_8->ahb_slave_socket);
@@ -262,7 +262,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 9");
     timer_9.reset(new TIMER("timer_9", 4096));
-    timer_9->clk(clk_timer->signal());
+    timer_9->clk(*clk_timer);
     timer_9->rst_n(rst_n);
     timer_9->irq_n(channel[49]);
     my_bus->ahb_to_slave_socket.bind(timer_9->ahb_slave_socket);
@@ -271,7 +271,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 10");
     timer_10.reset(new TIMER("timer_10", 4096));
-    timer_10->clk(clk_timer->signal());
+    timer_10->clk(*clk_timer);
     timer_10->rst_n(rst_n);
     timer_10->irq_n(channel[50]);
     my_bus->ahb_to_slave_socket.bind(timer_10->ahb_slave_socket);
@@ -280,7 +280,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     print_line();
     printm(d_realviewpb, "Timer 11");
     timer_11.reset(new TIMER("timer_11", 4096));
-    timer_11->clk(clk_timer->signal());
+    timer_11->clk(*clk_timer);
     timer_11->rst_n(rst_n);
     timer_11->irq_n(channel[51]);
     my_bus->ahb_to_slave_socket.bind(timer_11->ahb_slave_socket);
