@@ -18,7 +18,7 @@
 #include <sysctrl_1.h>
 #include <timer.h>
 #include <uart.h>
-#include <black_hole.h>
+//#include <black_hole.h>
 
 class board_realviewpb: public sc_module
 {
@@ -49,7 +49,7 @@ class board_realviewpb: public sc_module
         auto_ptr<TIMER>timer_0, timer_2;
         auto_ptr<UART>uart_0;
         auto_ptr<RAM>smp_boot_rom;
-        auto_ptr<black_hole>bh;
+        //auto_ptr<black_hole>bh;
 
         auto_ptr<sc_clock>clk_fast;                             //2000MHz clock
         auto_ptr<sc_clock>clk_slow;                             //400MHz clock

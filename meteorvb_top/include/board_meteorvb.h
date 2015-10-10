@@ -9,7 +9,7 @@
 
 #include <armv7a.h>
 #include <ahb.h>
-#include <black_hole.h>
+//#include <black_hole.h>
 #include <gic2_cpu_if.h>
 #include <gic2_dist.h>
 #include <gic2_vcpu_if.h>
@@ -62,7 +62,7 @@ class board_meteorvb: public sc_module
         auto_ptr<UART>                  uart_4, uart_5, uart_6, uart_7;
         auto_ptr<TIMER>                 timer_4, timer_5, timer_6, timer_7;
         auto_ptr<TIMER>                 timer_8, timer_9, timer_10, timer_11;
-        auto_ptr<black_hole>            bh_0, bh_1, bh_2, bh_3;
+        //auto_ptr<black_hole>            bh_0, bh_1, bh_2, bh_3;
 
         auto_ptr<semihost>              semi;
 };

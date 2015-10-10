@@ -296,6 +296,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
 
     /* black holes */
 
+    /*
     print_line();
     printm(d_realviewpb, "Black Hole 0");
     bh_0.reset(new black_hole("bh_0", 4096));
@@ -319,6 +320,7 @@ board_meteorvb::board_meteorvb(sc_module_name name, bool using_gdb, unsigned int
     bh_3.reset(new black_hole("bh_3", 4096));
     my_bus->ahb_to_slave_socket.bind(bh_3->ahb_slave_socket);
     my_bus->add_mapping(slave_id++, 0x90003000, 4096);
+    */
 
     print_line();
 }

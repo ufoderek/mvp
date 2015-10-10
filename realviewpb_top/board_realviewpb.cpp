@@ -355,11 +355,11 @@ board_realviewpb::board_realviewpb(sc_module_name name, bool using_gdb, unsigned
         gic_dist->spi_n[i - 32](channel[i]);
     }
 
-    print_line();
-    printm(d_realviewpb, "Black Hole");
-    bh.reset(new black_hole("bh", 4096));
-    my_bus->ahb_to_slave_socket.bind(bh->ahb_slave_socket);
-    my_bus->add_mapping(slave_id++, 0x20000000, 4096);
+    //print_line();
+    //printm(d_realviewpb, "Black Hole");
+    //bh.reset(new black_hole("bh", 4096));
+    //my_bus->ahb_to_slave_socket.bind(bh->ahb_slave_socket);
+    //my_bus->add_mapping(slave_id++, 0x20000000, 4096);
 
     print_line();
 }
